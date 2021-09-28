@@ -1,0 +1,8 @@
+smtp:
+  sender-default: ${SMTP_SENDER_DEFAULT}
+  host: ${SMTP_HOST}
+  port: ${SMTP_PORT}
+  email: ${SMTP_EMAIL}
+  password: ${SMTP_PASSWORD}
+server:
+  port: 9000
