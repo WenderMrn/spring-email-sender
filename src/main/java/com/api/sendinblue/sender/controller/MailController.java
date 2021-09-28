@@ -32,7 +32,7 @@ public class MailController {
 		
 		if(result.hasErrors()) {
 			result.getAllErrors().forEach( r -> body.put("message", r.getDefaultMessage()));
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
 		}
         
 		try {
