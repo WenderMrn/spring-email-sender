@@ -1,5 +1,7 @@
 package com.api.sendinblue.sender.mail;
 
+import com.api.sendinblue.sender.dto.SimpleMailMessageDTO;
+
 public interface MailService {
-	void sendSimpleMessage(String to, String subject, String text);
+	void sendSimpleMessage(SimpleMailMessageDTO message);
 }

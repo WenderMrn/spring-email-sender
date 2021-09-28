@@ -5,8 +5,10 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
+import com.api.sendinblue.sender.dto.SimpleMailMessageDTO;
 import com.api.sendinblue.sender.mail.MailService;
 import com.api.sendinblue.sender.property.SmtpProperties;
+import com.api.sendinblue.sender.utils.Utils;
 
 @Component
 public class SpringMailService implements MailService {
@@ -17,19 +19,21 @@ public class SpringMailService implements MailService {
 	@Autowired
 	private JavaMailSender emailSender;
 
-	public SpringMailService () {
+	public SpringMailService() {
 	}
 
 	@Override
-	public void sendSimpleMessage(String to, String subject, String text) {
-		SimpleMailMessage message = new SimpleMailMessage();
+	public void sendSimpleMessage(SimpleMailMessageDTO message) {
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
 
-		message.setFrom(properties.getSenderDefault());
-		message.setTo(to);
-		message.setSubject(subject);
-		message.setText(text);
+		final String from = !Utils.isEmptyOrNull(message.getFrom()) ? message.getFrom() : properties.getSenderDefault();
 
-		emailSender.send(message);
+		mailMessage.setFrom(from);
+		mailMessage.setTo(message.getTo());
+		mailMessage.setSubject(message.getSubject());
+		mailMessage.setText(message.getText());
+
+		emailSender.send(mailMessage);
 	}
 
 }
