@@ -13,13 +13,13 @@ public class SimpleMailMessageDTO {
 	@Nullable
 	private String subject;
 	
-	@NotBlank(message = "to is required")
-	@NotNull(message = "to is required")
-	@Email(message = "to is not a valid e-mail valid") //TODO: create a custom validation
+	@NotNull
+	@NotBlank(message = "to can't blank")
+	@Email(message = "to is not a valid e-mail") //TODO: create a custom validation
 	private String to;
 	
 	@NotNull(message = "text is required")
-	@NotBlank(message = "text is required")
+	@NotBlank(message = "text can't blank")
 	private String text;
 	
 	public SimpleMailMessageDTO() {}
