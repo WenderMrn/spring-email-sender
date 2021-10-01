@@ -17,14 +17,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.sendinblue.sender.dto.SimpleMailMessageDTO;
+import com.api.sendinblue.sender.mail.MailService;
 import com.api.sendinblue.sender.service.SpringMailService;
 
 @RestController
 @RequestMapping("/email")
 public class MailController {
 
+	
+	private MailService mailService;
+	
 	@Autowired
-	private SpringMailService springMailService;
+	MailController(SpringMailService mailService){
+		this.mailService = mailService;
+	}
 
 	@PostMapping("/send")
 	public ResponseEntity<Map<String, Object>> sendSimpleMail(@Valid @RequestBody SimpleMailMessageDTO message,
@@ -44,7 +50,7 @@ public class MailController {
 		}
 
 		try {
-			springMailService.sendSimpleMessage(message);
+			mailService.sendSimpleMessage(message);
 			body.put("message", "Email successfully sent!");
 			return ResponseEntity.ok(body);
 		} catch (MailException e) {
