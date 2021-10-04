@@ -5,5 +5,5 @@ import com.api.sendinblue.sender.exception.BusinessException;
 
 public interface MailService {
 	void sendSimpleMessage(SimpleMailMessageDTO message) throws BusinessException;
-	void sendHtmlMessage(String to, String subject, String htmlBody) throws BusinessException;
+	void sendHtmlMessage(SimpleMailMessageDTO message) throws BusinessException;
 }

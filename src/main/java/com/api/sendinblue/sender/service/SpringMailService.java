@@ -50,21 +50,20 @@ public class SpringMailService implements MailService {
 	}
 
 	@Override
-	public void sendHtmlMessage(String to, String subject, String htmlBody) throws BusinessException {
+	public void sendHtmlMessage(SimpleMailMessageDTO message) throws BusinessException {
 
-		MimeMessage message = emailSender.createMimeMessage();
+		MimeMessage mailMessage = emailSender.createMimeMessage();
 		try {
-			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+			MimeMessageHelper helper = new MimeMessageHelper(mailMessage, true, "UTF-8");
 
-			helper.setTo(to);
-			helper.setSubject(subject);
-			helper.setText(htmlBody, true);
+			helper.setTo(message.getTo());
+			helper.setSubject(message.getSubject());
+			helper.setText(message.getText(), true);
 
-			emailSender.send(message);
+			emailSender.send(mailMessage);
 		} catch (Exception e) {
 			throw new BusinessException("Erro on sending e-mail.");
 		}
 
 	}
-
 }
