@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.sendinblue.sender.dto.SimpleMailMessageDTO;
+import com.api.sendinblue.sender.exception.BusinessException;
 import com.api.sendinblue.sender.mail.MailService;
 import com.api.sendinblue.sender.service.SpringMailService;
 
@@ -53,7 +54,7 @@ public class MailController {
 			mailService.sendSimpleMessage(message);
 			body.put("message", "Email successfully sent!");
 			return ResponseEntity.ok(body);
-		} catch (MailException e) {
+		} catch (BusinessException e) {
 			body.put("message", "Error on send email");
 			System.out.println(e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
