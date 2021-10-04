@@ -1,10 +1,11 @@
 package com.api.sendinblue.sender.dto;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.lang.Nullable;
+
+import com.api.sendinblue.sender.validation.email.EmailConstraint;
 
 public class SimpleMailMessageDTO {
 	@Nullable 
@@ -14,12 +15,12 @@ public class SimpleMailMessageDTO {
 	private String subject;
 	
 	@NotNull
-	@NotBlank(message = "to can't blank")
-	@Email(message = "to is not a valid e-mail") //TODO: create a custom validation
+	@NotBlank(message = "to can't be blank")
+	@EmailConstraint(message = "to is not a valid e-mail") 
 	private String to;
 	
 	@NotNull(message = "text is required")
-	@NotBlank(message = "text can't blank")
+	@NotBlank(message = "text can't be blank")
 	private String text;
 	
 	public SimpleMailMessageDTO() {}

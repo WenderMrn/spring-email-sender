@@ -40,11 +40,11 @@ public class MailController {
 		if (result.hasErrors()) {
 			Map<String, String> errors = new HashMap<>();
 			result.getAllErrors().forEach(e -> {
-				String fieldError = ((FieldError) e).getField(); // 2.
+				String fieldError = ((FieldError) e).getField();
 				errors.put(fieldError, e.getDefaultMessage());
 			});
 
-			body.put("message", "Please, check paramiters!");
+			body.put("message", "Please check the parameters!");
 			body.put("errors", errors);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
 		}
